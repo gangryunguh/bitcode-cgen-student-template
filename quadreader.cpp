@@ -238,9 +238,9 @@ bool readinfunc(FILE *stdin) {
             makeinstitems(ptr->text, ptr->numitems, items, &ptr->items);
         }
         else if ((sscanf(line, "%s := fi %s %s %s",
-                items[0],items[3],items[4],items[5]) == 4) ||
+                         items[0],items[3],items[4],items[5]) == 4) ||
                  (sscanf(line, "%s := ff %s %s %s",
-                items[0],items[3],items[4], items[5]) == 4)) {
+                         items[0],items[3],items[4], items[5]) == 4)) {
 
             ptr = insline(bot, (struct quadline *) NULL, line);
             ptr->type = FUNC_CALL;
@@ -258,6 +258,22 @@ bool readinfunc(FILE *stdin) {
             else
                 strcpy(items[2],"ff");
             ptr->numitems = numargs + 5;
+            makeinstitems(ptr->text, ptr->numitems, items, &ptr->items);
+        }
+        else if ((sscanf(line, "%s := fi %s %s",
+                         items[0],items[3],items[4]) == 3) ||
+                 (sscanf(line, "%s := ff %s %s",
+                         items[0],items[3],items[4]) == 3)) {
+            ptr = insline(bot, (struct quadline *) NULL, line);
+            ptr->type = FUNC_CALL;
+            int numargs = atoi(items[4]);
+            assert(numargs == 0 && "Number of arguments must be 0");
+            strcpy(items[1],":=");
+            if (strstr(ptr->text, "fi"))
+                strcpy(items[2],"fi");
+            else
+                strcpy(items[2],"ff");
+            ptr->numitems = 4;
             makeinstitems(ptr->text, ptr->numitems, items, &ptr->items);
         }
         else if (sscanf(line, "%s %s %s %s %s",
