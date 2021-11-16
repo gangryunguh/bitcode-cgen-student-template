@@ -18,7 +18,7 @@ static char quad_type_names[][MAXLINE] = {
         "ASSIGN","UNARY","BINOP","JUMP","BRANCH","LOCAL_ALLOC","LOCAL_REF",
         "FORMAL_ALLOC","PARAM_REF","GLOBAL_ALLOC","GLOBAL_REF","CONSTANT",
         "STRING","FUNC_BEGIN","FUNC_END","FUNC_CALL","ADDR_ARRAY_INDEX",
-        "STORE","LOAD","RETURN","NONE"
+        "STORE","LOAD","RETURN","CVF", "CVI","NONE"
 };
 
 void dumpblk(struct bblk *cblk) {
@@ -281,6 +281,10 @@ bool readinfunc(FILE *stdin) {
                 ptr->type = GLOBAL_REF;
             else if (*items[2]=='@')
                 ptr->type = LOAD;
+            else if (strcmp(items[2],"cvf")==0)
+                ptr->type = CVF;
+            else if (strcmp(items[2],"cvi")==0)
+                ptr->type = CVI;
             else
                 assert(0 && "Unknown quadruple type");
             ptr->numitems = 4;
@@ -401,6 +405,10 @@ bool readinfunc(FILE *stdin) {
 int main(int argc, char *argv[]) {
 
     InitializeModuleAndPassManager();
+    //FILE *inf = fopen("test1.sem","r");
+    //FILE *inf = fopen("test1.sem","r");
+
+    //while (readinfunc(inf)) {
     while (readinfunc(stdin)) {
         backpatching();
         setupcontrolflow();
