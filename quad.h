@@ -106,6 +106,8 @@ typedef enum arithematic_type {
     MOD,
     LSHIFT,
     RSHIFT,
+    OR,
+    AND,
     NONE_AR
 } arithematic_type;
 

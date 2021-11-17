@@ -301,6 +301,9 @@ bool readinfunc(FILE *stdin) {
                 ptr->type = CVF;
             else if (strcmp(items[2],"cvi")==0)
                 ptr->type = CVI;
+            else if (strcmp(items[2],"-i")==0 ||
+                     strcmp(items[2],"-f")==0)
+                ptr->type = UNARY;
             else
                 assert(0 && "Unknown quadruple type");
             ptr->numitems = 4;
