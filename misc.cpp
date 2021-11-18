@@ -214,7 +214,7 @@ void addtobplist(struct bplist **head, char *blabel, char *tlabel) {
 }
 
 /*
- * deletefrombplist - add a basic block to a blist
+ * deletefrombplist - delete a basic block to a blist
  */
 void deletefrombplist(struct bplist **head, char *blabel) {
     struct bplist *bptr, *bprev;

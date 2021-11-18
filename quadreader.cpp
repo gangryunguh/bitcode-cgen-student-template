@@ -273,7 +273,7 @@ bool readinfunc(FILE *stdin) {
                 strcpy(items[2],"fi");
             else
                 strcpy(items[2],"ff");
-            ptr->numitems = 4;
+            ptr->numitems = 5;
             makeinstitems(ptr->text, ptr->numitems, items, &ptr->items);
         }
         else if (sscanf(line, "%s %s %s %s %s",
