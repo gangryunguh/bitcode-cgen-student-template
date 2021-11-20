@@ -64,11 +64,13 @@ void backpatching() {
         }
         if (cblk->lineend && strcmp(cblk->lineend->items[0], "br") == 0) {
                 bptr = inbplist(gbp, cblk->lineend->items[1]);
-                replacestring(&cblk->lineend->text, bptr->ptr->bl,
-                              bptr->ptr->tl);
-                replacestring(&cblk->lineend->items[1], bptr->ptr->bl,
-                              bptr->ptr->tl);
-                deletefrombplist(&gbp, bptr->ptr->bl);
+                if (bptr) {
+                    replacestring(&cblk->lineend->text, bptr->ptr->bl,
+                                  bptr->ptr->tl);
+                    replacestring(&cblk->lineend->items[1], bptr->ptr->bl,
+                                  bptr->ptr->tl);
+                    deletefrombplist(&gbp, bptr->ptr->bl);
+                }
         }
     }
 }
